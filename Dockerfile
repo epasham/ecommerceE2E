@@ -4,7 +4,8 @@ COPY pom.xml /home/app
 COPY lombok.config /home/app
 RUN mvn -f /home/app/pom.xml clean package -DskipTests
 
-FROM openjdk:11
+#FROM openjdk:11
+FROM adoptopenjdk/openjdk11:jdk-11.0.9_11-alpine-slim
 COPY --from=build /home/app/target/ecommerce-0.0.1-SNAPSHOT.jar /usr/share/app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/usr/share/app.jar"]
